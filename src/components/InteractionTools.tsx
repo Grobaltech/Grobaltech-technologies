@@ -73,9 +73,34 @@ export default function InteractionTools() {
         <p className="text-xs text-slate-400 mt-4">Changes preview instantly and apply to this browsing session.</p>
       </aside>
     </div>}
-    {searchOpen && <div className="fixed inset-0 z-[95] bg-slate-950/70 backdrop-blur-sm flex justify-end" onMouseDown={e => {if(e.target===e.currentTarget)setSearchOpen(false)}}>
-      <form className="w-full max-w-md bg-white h-full p-6 shadow-2xl flex flex-col items-stretch gap-5 animate-panel-in" onSubmit={e => {e.preventDefault(); const q = new FormData(e.currentTarget).get('q')?.toString().trim(); if(q) window.location.href = '/products?search=' + encodeURIComponent(q)}}>
-        <div className="flex items-center justify-between"><span className="font-bold text-xl text-slate-900">Search products</span><Search className="text-primary-600"/></div><input autoFocus name="q" placeholder="Search products…" className="w-full outline-none text-slate-900 py-3 px-4 rounded-xl border border-slate-200 focus:border-primary-500" aria-label="Search products"/><button type="button" onClick={() => setSearchOpen(false)} className="p-2 rounded-lg hover:bg-slate-100 self-end"><X/></button><button type="submit" className="px-5 py-3 rounded-full bg-primary-600 text-white font-semibold">Search</button>
+    {searchOpen && <div
+      className="fixed inset-0 z-[95] min-h-[100dvh] bg-slate-950/95 backdrop-blur-xl flex items-center justify-center p-5 sm:p-10 animate-search-screen"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Site search"
+      onMouseDown={e => { if (e.target === e.currentTarget) setSearchOpen(false) }}
+    >
+      <button
+        type="button"
+        onClick={() => setSearchOpen(false)}
+        aria-label="Close search"
+        title="Close search"
+        className="absolute top-5 right-5 sm:top-8 sm:right-8 w-12 h-12 rounded-full border border-white/25 text-white flex items-center justify-center hover:bg-white hover:text-slate-950 hover:rotate-90 transition-all duration-300"
+      ><X size={25}/></button>
+      <form
+        className="w-full max-w-4xl flex flex-col items-center gap-7 sm:gap-10 animate-search-content"
+        onSubmit={e => { e.preventDefault(); const q = new FormData(e.currentTarget).get('q')?.toString().trim(); if (q) window.location.href = '/products?search=' + encodeURIComponent(q) }}
+      >
+        <div className="text-center">
+          <p className="text-xs sm:text-sm uppercase tracking-[.35em] text-primary-300 font-bold mb-4">Explore Grobaltech</p>
+          <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight">What are you looking for?</h2>
+        </div>
+        <div className="w-full flex items-center gap-3 sm:gap-5 border-b-2 border-white/35 focus-within:border-primary-400 pb-4 sm:pb-5 transition-colors">
+          <Search className="text-primary-300 shrink-0" size={28}/>
+          <input autoFocus name="q" placeholder="Type your search here..." className="min-w-0 flex-1 bg-transparent outline-none text-white placeholder:text-slate-400 text-xl sm:text-3xl py-2" aria-label="Search products"/>
+          <button type="submit" aria-label="Submit search" className="shrink-0 rounded-full bg-primary-600 hover:bg-primary-500 text-white px-5 sm:px-8 py-3 font-semibold transition-colors">Search</button>
+        </div>
+        <p className="text-slate-400 text-sm">Press Esc to close</p>
       </form>
     </div>}
     <button onClick={() => setSearchOpen(true)} aria-label="Open search" title="Search (Ctrl+K)" className="sr-only">Search</button>

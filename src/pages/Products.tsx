@@ -6,6 +6,7 @@ export default function Products() {
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [searchTerm, setSearchTerm] = useState(() => new URLSearchParams(window.location.search).get('search')?.toLowerCase() || '')
 
   useEffect(() => {
     async function load() {
@@ -58,8 +59,10 @@ export default function Products() {
         )}
 
         {!loading && !error && (
+          <>
+          <div className="max-w-md mx-auto mb-8"><input value={searchTerm} onChange={e => setSearchTerm(e.target.value)} placeholder="Search products…" aria-label="Search products" className="w-full rounded-full border border-slate-200 px-5 py-3 outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100" /></div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {products.map((p) => (
+            {products.filter(p => (p.name + ' ' + (p.description || '') + ' ' + (p.category || '')).toLowerCase().includes(searchTerm)).map((p) => (
               <Link
                 key={p.id}
                 to={`/products/${p.slug}`}
@@ -88,6 +91,8 @@ export default function Products() {
               </Link>
             ))}
           </div>
+          {products.filter(p => (p.name + ' ' + (p.description || '') + ' ' + (p.category || '')).toLowerCase().includes(searchTerm)).length === 0 && <p className="text-center text-slate-500 py-10">No products match that search.</p>}
+          </>
         )}
       </div>
     </div>

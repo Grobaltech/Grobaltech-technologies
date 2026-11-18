@@ -1,9 +1,18 @@
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || ''
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || ''
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL?.trim() || ''
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY?.trim() || ''
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+// Keep the React application bootable when optional Supabase build variables
+// have not been configured. Pages check VITE_SUPABASE_URL before making
+// database requests, so this fallback is never used for real data access.
+const fallbackUrl = 'https://placeholder-project.supabase.co'
+const fallbackAnonKey = 'placeholder-anon-key'
+
+export const supabase = createClient(
+  supabaseUrl || fallbackUrl,
+  supabaseAnonKey || fallbackAnonKey,
+)
 
 // Types for products (match your Supabase table)
 export type Product = {

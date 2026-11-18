@@ -55,3 +55,53 @@ html[data-layout="boxed"] .site-shell { max-width:1440px;margin-inline:auto;box-
 html[data-pattern="dots"] body { background-image:radial-gradient(#94a3b822 1px,transparent 1px);background-size:20px 20px; }
 html[data-pattern="grid"] body { background-image:linear-gradient(#94a3b818 1px,transparent 1px),linear-gradient(90deg,#94a3b818 1px,transparent 1px);background-size:28px 28px; }
 @media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important; } }
+
+
+/* Service cards: smooth brand-colour sweep on hover */
+.service-card {
+  transition: transform .45s cubic-bezier(.2,.7,.2,1), box-shadow .45s ease;
+}
+.service-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, var(--brand-primary), color-mix(in srgb, var(--brand-primary) 72%, #31206f));
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform .55s cubic-bezier(.2,.75,.2,1);
+}
+.service-card:hover {
+  transform: translateY(-8px);
+}
+.service-card:hover::before,
+.service-card:focus-within::before {
+  transform: scaleY(1);
+}
+.service-card-icon {
+  transition: background-color .4s ease, color .4s ease, transform .45s cubic-bezier(.2,.7,.2,1);
+}
+.service-card:hover .service-card-icon,
+.service-card:focus-within .service-card-icon {
+  background: rgba(255,255,255,.18);
+  color: #fff;
+  transform: rotate(-8deg) scale(1.06);
+}
+.service-card:hover .service-card-title,
+.service-card:focus-within .service-card-title,
+.service-card:hover .service-card-copy,
+.service-card:focus-within .service-card-copy,
+.service-card:hover .service-card-link,
+.service-card:focus-within .service-card-link {
+  color: #fff;
+}
+.service-card-link { text-decoration-color: transparent; }
+.service-card:hover .service-card-link,
+.service-card:focus-within .service-card-link {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .service-card, .service-card::before, .service-card-icon { transition: none; }
+}

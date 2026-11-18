@@ -1,5 +1,5 @@
 import { Link, NavLink } from 'react-router-dom'
-import { Phone, Menu } from 'lucide-react'
+import { Phone, Menu, Search } from 'lucide-react'
 import { useState } from 'react'
 
 const navItems = [
@@ -44,6 +44,7 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-3">
+            <button onClick={() => window.dispatchEvent(new Event('grobaltech:open-search'))} aria-label="Search products" title="Search (Ctrl+K)" className="w-10 h-10 rounded-full flex items-center justify-center text-slate-700 hover:bg-primary-50 hover:text-primary-600 transition"><Search className="w-5 h-5" /></button>
             <a
               href="tel:+1237878222"
               className="hidden md:flex items-center gap-2 text-sm font-medium text-slate-700"

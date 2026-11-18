@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type CSSProperties } from 'react'
 import { ArrowUp, Search, Settings2, X } from 'lucide-react'
 
 export default function InteractionTools() {
@@ -12,7 +12,7 @@ export default function InteractionTools() {
   const [pattern, setPattern] = useState<'none' | 'dots' | 'grid'>('none')
 
   useEffect(() => {
-    const finish = () => window.setTimeout(() => setLoading(false), 350)
+    const finish = () => window.setTimeout(() => setLoading(false), 1100)
     if (document.readyState === 'complete') finish()
     else {
       window.addEventListener('load', finish, { once: true })
@@ -60,7 +60,7 @@ export default function InteractionTools() {
     </div>}
     <div className="fixed bottom-6 right-6 z-[70] flex flex-col gap-3 items-center">
       <button onClick={() => setSettingsOpen(true)} aria-label="Open appearance settings" className="w-11 h-11 rounded-full bg-slate-900 text-white shadow-xl flex items-center justify-center hover:bg-primary-600 transition"><Settings2 size={19}/></button>
-      <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} aria-label="Scroll to top" className={`scroll-progress ${progress > 3 ? 'is-visible' : ''}`} style={{ '--scroll-progress': `${progress}%` } as React.CSSProperties}><ArrowUp size={19}/></button>
+      <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} aria-label="Scroll to top" className={`scroll-progress ${progress > 3 ? 'is-visible' : ''}`} style={{ '--scroll-progress': `${progress}%` } as CSSProperties}><ArrowUp size={19}/></button>
     </div>
     {settingsOpen && <div className="fixed inset-0 z-[90] bg-slate-950/40 backdrop-blur-sm flex justify-end" onMouseDown={(e) => { if (e.target === e.currentTarget) setSettingsOpen(false) }}>
       <aside className="w-full max-w-sm bg-white h-full p-7 shadow-2xl overflow-y-auto animate-panel-in">

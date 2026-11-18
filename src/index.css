@@ -105,3 +105,23 @@ html[data-pattern="grid"] body { background-image:linear-gradient(#94a3b818 1px,
 @media (prefers-reduced-motion: reduce) {
   .service-card, .service-card::before, .service-card-icon { transition: none; }
 }
+
+
+/* Recent projects: accent-colour image overlay and reveal interaction */
+.project-card { isolation:isolate; background:#0f172a; transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s ease; }
+.project-card-image { transition:transform .8s cubic-bezier(.2,.7,.2,1),filter .6s ease; }
+.project-card-tint { z-index:1; background:linear-gradient(145deg,color-mix(in srgb,var(--brand-primary) 88%,#160d35) 0%,color-mix(in srgb,var(--brand-primary) 72%,#080d1c) 100%); opacity:.82; transition:opacity .55s ease,transform .65s cubic-bezier(.2,.7,.2,1); }
+.project-card-content { z-index:2; }
+.project-card-category { color:rgba(255,255,255,.82); transform:translateY(12px); transition:transform .5s ease,color .4s ease; }
+.project-card-title { transform:translateY(16px); transition:transform .55s cubic-bezier(.2,.7,.2,1); }
+.project-card-description { max-width:32rem; color:rgba(255,255,255,.9); opacity:0; transform:translateY(14px); transition:opacity .45s ease .08s,transform .5s ease .08s; }
+.project-card-arrow { opacity:0; transform:translateY(12px) rotate(-35deg); transition:opacity .4s ease .12s,transform .5s cubic-bezier(.2,.7,.2,1) .08s,background-color .3s ease; }
+.project-card:hover,.project-card:focus-visible { transform:translateY(-8px); box-shadow:0 24px 55px color-mix(in srgb,var(--brand-primary) 24%,transparent); }
+.project-card:hover .project-card-image,.project-card:focus-visible .project-card-image { transform:scale(1.09); filter:saturate(.8); }
+.project-card:hover .project-card-tint,.project-card:focus-visible .project-card-tint { opacity:.94; }
+.project-card:hover .project-card-category,.project-card:focus-visible .project-card-category,.project-card:hover .project-card-title,.project-card:focus-visible .project-card-title { transform:translateY(0); }
+.project-card:hover .project-card-description,.project-card:focus-visible .project-card-description { opacity:1; transform:translateY(0); }
+.project-card:hover .project-card-arrow,.project-card:focus-visible .project-card-arrow { opacity:1; transform:translateY(0) rotate(0); }
+.project-card-arrow:hover { background:#fff;color:var(--brand-primary); }
+@media (hover:none) { .project-card-tint { opacity:.86; } .project-card-title,.project-card-category { transform:none; } .project-card-description { opacity:1;transform:none; } .project-card-arrow { opacity:1;transform:none; } }
+@media (prefers-reduced-motion:reduce) { .project-card,.project-card-image,.project-card-tint,.project-card-category,.project-card-title,.project-card-description,.project-card-arrow { transition:none; } }

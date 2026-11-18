@@ -17,11 +17,41 @@
   --color-dark-950: #020617;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+:root { --brand-primary: #8b5cf6; --brand-secondary: #0f172a; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+button, a { -webkit-tap-highlight-color: transparent; }
+::selection { background: color-mix(in srgb, var(--brand-primary) 24%, white); }
 
-body {
-  font-family: var(--font-sans);
-  antialiased: true;
-}
+.site-preloader { position: fixed; inset: 0; z-index: 200; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; background:#080d1c; color:white; animation: preloader-out .55s ease 2.7s forwards; pointer-events:all; }
+.preloader-mark { width:64px;height:64px;border-radius:20px;display:grid;place-items:center;background:linear-gradient(135deg,var(--brand-primary),#5b21b6);font-size:32px;font-weight:800;box-shadow:0 12px 40px #8b5cf655;animation:mark-pulse 1.2s ease-in-out infinite alternate; }
+.preloader-name { letter-spacing:.2em;font-size:13px;font-weight:800; }
+.preloader-track { width:150px;height:3px;background:#ffffff22;border-radius:9px;overflow:hidden;margin-top:10px; }
+.preloader-track span { display:block;width:40%;height:100%;background:var(--brand-primary);animation:loader-sweep 1s ease-in-out infinite; }
+.preloader-caption { color:#94a3b8;font-size:11px;letter-spacing:.08em; }
+@keyframes preloader-out { to { opacity:0;visibility:hidden;pointer-events:none; } }
+@keyframes mark-pulse { to { transform:translateY(-5px);box-shadow:0 18px 45px #8b5cf677; } }
+@keyframes loader-sweep { from { transform:translateX(-110%); } to { transform:translateX(260%); } }
+
+.hero-slide { opacity:0; transition:opacity 1s ease; }
+.hero-slide.is-active { opacity:1; }
+.hero-slide img { transform:scale(1.06); transition:transform 7s ease; }
+.hero-slide.is-active img { transform:scale(1); }
+.hero-reveal { opacity:0; transform:translateY(24px); animation:hero-rise .75s cubic-bezier(.2,.7,.2,1) forwards; }
+.hero-delay-1 { animation-delay:.12s; }.hero-delay-2 { animation-delay:.25s; }.hero-delay-3 { animation-delay:.4s; }.hero-delay-4 { animation-delay:.55s; }
+@keyframes hero-rise { to { opacity:1;transform:translateY(0); } }
+.hero-dot { width:8px;height:8px;border-radius:99px;background:#ffffff77;transition:all .3s; }
+.hero-dot.active { width:30px;background:var(--brand-primary); }
+.scroll-progress { width:46px;height:46px;border-radius:50%;display:grid;place-items:center;color:white;background:conic-gradient(var(--brand-primary) var(--scroll-progress,0%),#cbd5e1 var(--scroll-progress,0%));position:relative;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .25s,transform .25s; }
+.scroll-progress::before { content:"";position:absolute;inset:3px;border-radius:50%;background:#0f172a; }
+.scroll-progress svg { position:relative;z-index:1; }.scroll-progress.is-visible { opacity:1;transform:translateY(0);pointer-events:auto; }
+.animate-panel-in { animation:panel-in .3s ease both; }
+@keyframes panel-in { from { transform:translateX(30px);opacity:0; } to { transform:translateX(0);opacity:1; } }
+.social-chip { width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:white;color:#334155;transition:all .2s; }
+.social-chip:hover { background:var(--brand-primary);color:white;transform:translateY(-3px); }
+.pricing-card { transition:transform .35s,box-shadow .35s; }.pricing-card:hover { transform:translateY(-7px);box-shadow:0 22px 50px #0f172a18; }
+.site-shell { transition:max-width .3s,margin .3s; }
+html[data-layout="boxed"] .site-shell { max-width:1440px;margin-inline:auto;box-shadow:0 0 50px #0f172a12; }
+html[data-pattern="dots"] body { background-image:radial-gradient(#94a3b822 1px,transparent 1px);background-size:20px 20px; }
+html[data-pattern="grid"] body { background-image:linear-gradient(#94a3b818 1px,transparent 1px),linear-gradient(90deg,#94a3b818 1px,transparent 1px);background-size:28px 28px; }
+@media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important; } }

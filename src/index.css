@@ -17,7 +17,7 @@
   --color-dark-950: #020617;
 }
 
-:root { --brand-primary: #8b5cf6; --brand-secondary: #0f172a; }
+:root { --brand-primary: #8b5cf6; --brand-secondary: #0f172a; --color-primary-500: var(--brand-primary); --color-primary-600: color-mix(in srgb, var(--brand-primary) 88%, black); --color-primary-700: color-mix(in srgb, var(--brand-primary) 75%, black); --color-primary-100: color-mix(in srgb, var(--brand-primary) 12%, white); --color-dark-900: var(--brand-secondary); --color-dark-950: color-mix(in srgb, var(--brand-secondary) 85%, black); }
 html { scroll-behavior: smooth; }
 body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 button, a { -webkit-tap-highlight-color: transparent; }

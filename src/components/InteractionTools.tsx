@@ -73,9 +73,9 @@ export default function InteractionTools() {
         <p className="text-xs text-slate-400 mt-4">Changes preview instantly and apply to this browsing session.</p>
       </aside>
     </div>}
-    {searchOpen && <div className="fixed inset-0 z-[95] bg-slate-950/70 backdrop-blur-sm p-4 flex items-start justify-center pt-[15vh]" onMouseDown={e => {if(e.target===e.currentTarget)setSearchOpen(false)}}>
-      <form className="w-full max-w-2xl bg-white rounded-2xl p-4 shadow-2xl flex items-center gap-3" onSubmit={e => {e.preventDefault(); const q = new FormData(e.currentTarget).get('q')?.toString().trim(); if(q) window.location.href = '/products?search=' + encodeURIComponent(q)}}>
-        <Search className="text-primary-600"/><input autoFocus name="q" placeholder="Search products…" className="flex-1 outline-none text-slate-900 py-3" aria-label="Search products"/><button type="button" onClick={() => setSearchOpen(false)} className="p-2 rounded-lg hover:bg-slate-100"><X/></button><button type="submit" className="px-5 py-3 rounded-full bg-primary-600 text-white font-semibold">Search</button>
+    {searchOpen && <div className="fixed inset-0 z-[95] bg-slate-950/70 backdrop-blur-sm flex justify-end" onMouseDown={e => {if(e.target===e.currentTarget)setSearchOpen(false)}}>
+      <form className="w-full max-w-md bg-white h-full p-6 shadow-2xl flex flex-col items-stretch gap-5 animate-panel-in" onSubmit={e => {e.preventDefault(); const q = new FormData(e.currentTarget).get('q')?.toString().trim(); if(q) window.location.href = '/products?search=' + encodeURIComponent(q)}}>
+        <div className="flex items-center justify-between"><span className="font-bold text-xl text-slate-900">Search products</span><Search className="text-primary-600"/></div><input autoFocus name="q" placeholder="Search products…" className="w-full outline-none text-slate-900 py-3 px-4 rounded-xl border border-slate-200 focus:border-primary-500" aria-label="Search products"/><button type="button" onClick={() => setSearchOpen(false)} className="p-2 rounded-lg hover:bg-slate-100 self-end"><X/></button><button type="submit" className="px-5 py-3 rounded-full bg-primary-600 text-white font-semibold">Search</button>
       </form>
     </div>}
     <button onClick={() => setSearchOpen(true)} aria-label="Open search" title="Search (Ctrl+K)" className="sr-only">Search</button>

@@ -39,6 +39,12 @@ export default function InteractionTools() {
   }, [primary, secondary, layout, pattern])
 
   useEffect(() => {
+    const openSearch = () => setSearchOpen(true)
+    window.addEventListener('grobaltech:open-search', openSearch)
+    return () => window.removeEventListener('grobaltech:open-search', openSearch)
+  }, [])
+
+  useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape') { setSearchOpen(false); setSettingsOpen(false) }
       if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') { event.preventDefault(); setSearchOpen(true) }

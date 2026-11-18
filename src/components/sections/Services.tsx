@@ -28,13 +28,13 @@ export default function Services() {
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((s) => (
-            <div key={s.title} className="bg-white rounded-2xl p-8 shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-lg transition group">
-              <div className="w-14 h-14 rounded-2xl bg-primary-100 text-primary-600 flex items-center justify-center mb-6 group-hover:bg-primary-500 group-hover:text-white transition">
+            <div key={s.title} className="service-card group relative isolate overflow-hidden bg-white rounded-2xl p-8 shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_18px_45px_rgba(139,92,246,0.24)]">
+              <div className="service-card-icon relative z-10 w-14 h-14 rounded-2xl bg-primary-100 text-primary-600 flex items-center justify-center mb-6 transition-colors duration-500">
                 <s.icon className="w-7 h-7" />
               </div>
-              <h3 className="text-xl font-bold text-dark-900 mb-3">{s.title}</h3>
-              <p className="text-slate-500 text-sm leading-relaxed mb-5">{s.desc}</p>
-              <a href="#" className="text-primary-600 font-semibold text-sm inline-flex items-center gap-1 hover:gap-2 transition">
+              <h3 className="service-card-title relative z-10 text-xl font-bold text-dark-900 mb-3 transition-colors duration-500">{s.title}</h3>
+              <p className="service-card-copy relative z-10 text-slate-500 text-sm leading-relaxed mb-5 transition-colors duration-500">{s.desc}</p>
+              <a href="#" className="service-card-link relative z-10 text-primary-600 font-semibold text-sm inline-flex items-center gap-1 hover:gap-2 transition-all duration-300">
                 See Details →
               </a>
             </div>

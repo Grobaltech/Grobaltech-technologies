@@ -12,11 +12,11 @@ export default function InteractionTools() {
   const [pattern, setPattern] = useState<'none' | 'dots' | 'grid'>('none')
 
   useEffect(() => {
-    const finish = () => window.setTimeout(() => setLoading(false), 1100)
+    const finish = () => window.setTimeout(() => setLoading(false), 2600)
     if (document.readyState === 'complete') finish()
     else {
       window.addEventListener('load', finish, { once: true })
-      const fallback = window.setTimeout(finish, 3500)
+      const fallback = window.setTimeout(finish, 5500)
       return () => { window.removeEventListener('load', finish); window.clearTimeout(fallback) }
     }
   }, [])
@@ -55,6 +55,7 @@ export default function InteractionTools() {
 
   return <>
     {loading && <div className="site-preloader" aria-label="Loading Grobaltech">
+      <button type="button" className="preloader-close" onClick={() => setLoading(false)} aria-label="Skip loading screen" title="Skip intro"><X size={19}/><span>Skip</span></button>
       <div className="preloader-mark">G</div><span className="preloader-name">GROBALTECH</span>
       <span className="preloader-track"><span /></span><span className="preloader-caption">Preparing your experience</span>
     </div>}

@@ -127,20 +127,25 @@ html[data-pattern="grid"] body { background-image:linear-gradient(#94a3b818 1px,
 @media (prefers-reduced-motion:reduce) { .project-card,.project-card-image,.project-card-tint,.project-card-category,.project-card-title,.project-card-description,.project-card-arrow { transition:none; } }
 
 
-/* Team portraits: branded corner geometry and left-to-right social reveal */
+/* Team portraits: paired right-angle accent triangles rise from the base on hover */
+.team-photo { isolation:isolate; }
 .team-photo::before,.team-photo::after {
-  content:"";position:absolute;bottom:0;width:0;height:0;z-index:2;
-  border-style:solid;pointer-events:none;
-  transition:filter .45s ease,transform .55s cubic-bezier(.2,.7,.2,1);
+  content:"";position:absolute;bottom:0;width:50%;height:88px;z-index:2;
+  background:linear-gradient(135deg,var(--brand-primary),color-mix(in srgb,var(--brand-primary) 72%,#31206f));
+  pointer-events:none;opacity:0;
+  transition:transform .62s cubic-bezier(.2,.75,.2,1),opacity .35s ease;
 }
 .team-photo::before {
-  left:0;border-width:0 0 76px 76px;
-  border-color:transparent transparent transparent var(--brand-primary);
+  left:0;clip-path:polygon(0 0,0 100%,100% 100%);
+  transform:translateY(105%);
 }
 .team-photo::after {
-  right:0;border-width:76px 0 0 76px;
-  border-color:transparent transparent transparent var(--brand-primary);
-  transform:scaleX(-1);
+  right:0;clip-path:polygon(100% 0,0 100%,100% 100%);
+  transform:translateY(105%);
+}
+.group:hover .team-photo::before,.group:focus-within .team-photo::before,
+.group:hover .team-photo::after,.group:focus-within .team-photo::after {
+  opacity:.96;transform:translateY(0);
 }
 .team-socials { z-index:4; opacity:0; transform:translateX(-28px); transition:opacity .35s ease,transform .5s cubic-bezier(.2,.7,.2,1); }
 .group:hover .team-socials,.group:focus-within .team-socials { opacity:1;transform:translateX(0); }
@@ -149,7 +154,10 @@ html[data-pattern="grid"] body { background-image:linear-gradient(#94a3b818 1px,
 .social-chip-facebook { background:#1877f2; }
 .social-chip-linkedin { background:#0a66c2; }
 .social-chip-twitter { background:#111827; }
-@media (hover:none) { .team-socials { opacity:1;transform:none; } }
+@media (hover:none) {
+  .team-photo::before,.team-photo::after { opacity:.9;transform:translateY(0); }
+  .team-socials { opacity:1;transform:none; }
+}
 @media (prefers-reduced-motion:reduce) { .team-photo::before,.team-photo::after,.team-socials,.social-chip { transition:none; } }
 
 

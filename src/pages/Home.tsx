@@ -1,6 +1,7 @@
 import Hero from '../components/sections/Hero'
 import ServiceCards from '../components/sections/ServiceCards'
 import About from '../components/sections/About'
+import Stats from '../components/sections/Stats'
 import Services from '../components/sections/Services'
 import Projects from '../components/sections/Projects'
 import CtaBanner from '../components/sections/CtaBanner'
@@ -17,6 +18,7 @@ export default function Home() {
       <Hero />
       <ServiceCards />
       <About />
+      <Stats />
       <Services />
       <Projects />
       <CtaBanner />
